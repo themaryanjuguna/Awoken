@@ -1,4 +1,4 @@
-package models;
+package org.themaryanjuguna.models;
 
 public class News {
     private int id;
@@ -7,10 +7,20 @@ public class News {
     private String content;
 
 
+    public News() {
+    }
 
     public News(int employeeId, String title, String content) {
         this.employeeId = employeeId;
         this.title = title;
         this.content = content;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

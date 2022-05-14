@@ -1,4 +1,4 @@
-package models;
+package org.themaryanjuguna.models;
 
 public class User {
     private int id;
