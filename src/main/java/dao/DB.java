@@ -1,4 +1,4 @@
-package org.themaryanjuguna.dao;
+package dao;
 
 import org.sql2o.Sql2o;
 

@@ -1,4 +1,4 @@
-package org.themaryanjuguna.models;
+package models;
 
 public class Department {
     private int id;
