@@ -15,14 +15,14 @@ public class Sql2oUserDao implements UserDao {
     }
 
     @Override
-    public void save(User name) {
+    public void save(User users) {
         String sql = "INSERT INTO users (name, profile, position, role, employeeId, deptId) VALUES (:name, :profile, :position, :role, :employeeId, :deptId)";
         try (Connection connection = sql2o.open()) {
             int id = (int) connection.createQuery(sql, true)
-                    .bind(name)
+                    .bind(users)
                     .executeUpdate()
                     .getKey();
-            name.setId(id);
+            users.setId(id);
         } catch (Sql2oException e) {
             System.out.println("e");
         }

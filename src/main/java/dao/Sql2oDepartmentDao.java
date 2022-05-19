@@ -7,13 +7,13 @@ import org.sql2o.Sql2oException;
 
 import java.util.List;
 
-public class Sql2oDepartmentDao extends DepartmentDao {
+public class Sql2oDepartmentDao implements DepartmentDao {
 
     private Sql2oDepartmentDao departmentsDao;
     private Connection conn;
     private Sql2o sql2o;
 
-    public void Sql2oDepartmentsDao(Sql2o sql2o) {
+    public Sql2oDepartmentDao(Sql2o sql2o) {
         this.sql2o = sql2o;
     }
 
@@ -29,12 +29,11 @@ public class Sql2oDepartmentDao extends DepartmentDao {
         } catch (Sql2oException ex) { System.out.println("e"); }
     }
     @Override
-    public List<Department> findAll(int id){
+    public List<Department> findAll(){
         try(Connection connection = sql2o.open()) {
-            return (List<Department>) connection.createQuery("SELECT * FROM departments WHERE id = :id")
-                    .addParameter("id",id)
+            return connection.createQuery("SELECT * FROM departments")
                     .throwOnMappingFailure(false)
-                    .executeAndFetchFirst(Department.class);
+                    .executeAndFetch(Department.class);
         }
     }
     @Override

@@ -1,11 +1,16 @@
 package dao;
 
+import models.News;
 import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
-public interface Sql2oNewsDao {
+import java.util.List;
 
-}private final Sql2o sql2o;
+public class Sql2oNewsDao implements NewsDao {
+
+
+    final Sql2o sql2o;
 
     public Sql2oNewsDao(Sql2o sql2o) {
         this.sql2o = sql2o;
@@ -29,15 +34,7 @@ public interface Sql2oNewsDao {
                     .executeAndFetch(News.class);
         }
     }
-    @Override
-    public List<News> allNewsInDepartment(int departmentId){
-        String sql = "SELECT * FROM news WHERE departmentid = :departmentId";
-        try (Connection connection = sql2o.open()){
-            return connection.createQuery(sql)
-                    .addParameter("departmentId", departmentId)
-                    .executeAndFetch(News.class);
-        }
-    }
+
     public News findById(int id){
         String sql = "SELECT * FROM news WHERE id = :id";
         try(Connection connection = sql2o.open()) {
@@ -46,6 +43,17 @@ public interface Sql2oNewsDao {
                     .executeAndFetchFirst(News.class);
         }
     }
+
+    @Override
+    public List<News> allDepartmentNews(int deptId) {
+        String sql = "SELECT * FROM news WHERE deptid = :deptId";
+        try (Connection connection = sql2o.open()){
+            return connection.createQuery(sql)
+                    .addParameter("deptId", deptId)
+                    .executeAndFetch(News.class);
+        }
+    }
+
     @Override
     public void delete(int id){
         String sql = "DELETE FROM news WHERE id = :id";
@@ -55,8 +63,9 @@ public interface Sql2oNewsDao {
                     .executeUpdate();
         } catch (Sql2oException ex) {System.out.println("e"); }
     }
+
     @Override
-    public void clearAll(){
+    public void deleteAll() {
         String sql = "DELETE FROM news";
         try (Connection connection = sql2o.open()){
             connection.createQuery(sql)

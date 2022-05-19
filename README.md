@@ -42,6 +42,16 @@ CREATE DATABASE awoken_test WITH TEMPLATE awoken;
 * Java
 * Spark
 * PostgreSql
+* Postman:
+  * Department
+    * GET http://localhost:4567/Department
+    * POST http://localhost:4567/department/new
+  * User
+    * POST http://localhost:4567/User/new
+    * GET http://localhost:4567/User
+  * News
+    * POST http://localhost:4567/News/new
+    * GET http://localhost:4567/News
 
 ## Author Details
 Maryanne Njuguna [Linktree Profile](https://linktr.ee/themaryanjuguna)

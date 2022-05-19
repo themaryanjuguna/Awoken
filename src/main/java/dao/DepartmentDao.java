@@ -1,31 +1,24 @@
 package dao;
 
 import models.Department;
-import sun.java2d.cmm.Profile;
 
 import java.util.List;
 
-public abstract class DepartmentDao {
+public interface DepartmentDao {
 
     //CREATE: save department information
 
 
-    void save(Department department) {
-
-    }
+    void save(Department department);
 
     // list all departments
-    List<Department> findAll(int deptId) {
-        return null;
-    }
+    List<Department> findAll();
 
 
     //delete a department
-    void delete(int id) {
-    }
+    void delete(int id);
 
     //delete all departments
-    void clearAll() {
+    void clearAll();
 
-    }
 }
