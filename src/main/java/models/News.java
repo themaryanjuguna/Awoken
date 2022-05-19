@@ -16,6 +16,13 @@ public class News {
         this.content = content;
     }
 
+    public News(int id, int employeeId, String title, String content) {
+        this.id = id;
+        this.employeeId = employeeId;
+        this.title = title;
+        this.content = content;
+    }
+
     public int getId() {
         return id;
     }

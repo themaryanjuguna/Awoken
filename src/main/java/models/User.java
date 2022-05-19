@@ -3,7 +3,7 @@ package models;
 import java.util.Objects;
 
 public class User {
-    private int id;
+    public int id;
     private int employeeId;
     private String name;
     private String profile;
@@ -27,7 +27,7 @@ public class User {
         this.position = position;
         this.role = role;
     }
-
+// Equals & hash codes begin here
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,7 +40,8 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, employeeId, name, profile, position, role);
     }
-
+    // Equals & hash Ends here begin here
+    // getters and setters begin here
     public int getId() {
         return id;
     }
