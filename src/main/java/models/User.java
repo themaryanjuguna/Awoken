@@ -27,21 +27,7 @@ public class User {
         this.position = position;
         this.role = role;
     }
-// Equals & hash codes begin here
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && employeeId == user.employeeId && name.equals(user.name) && profile.equals(user.profile) && position.equals(user.position) && role.equals(user.role);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, employeeId, name, profile, position, role);
-    }
-    // Equals & hash Ends here begin here
-    // getters and setters begin here
     public int getId() {
         return id;
     }

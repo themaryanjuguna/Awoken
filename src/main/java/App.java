@@ -1,9 +1,8 @@
 import com.google.gson.Gson;
 import dao.*;
 import models.Department;
+import models.News;
 import models.User;
-
-import java.util.List;
 
 import static spark.Spark.*;
 
@@ -14,13 +13,26 @@ public class App {
 
         Gson gson = new Gson();
         Sql2oDepartmentDao sql2oDepartmentDao = new Sql2oDepartmentDao(DB.sql2o);
-        Sql2oUserDao userDao= new Sql2oUserDao(DB.sql2o);
-        Sql2oNewsDao newsDao = new Sql2oNewsDao(DB.sql2o);
+        Sql2oUserDao sql2oUserDao= new Sql2oUserDao(DB.sql2o);
+        Sql2oNewsDao sql2oNewsDao = new Sql2oNewsDao(DB.sql2o);
+
+       /*
+       Tests
+        User Mary = new User(5,"njeeri","Good communication skills","admin","company admin");
+        sql2oUserDao.save(Mary);
+        News ktn = new News(33,"Employee of the Month","This months Award goes to Tim");
+        sql2oNewsDao.save(ktn);
+        Department hr = new Department("Accounts","Finance Team",35);
+        sql2oDepartmentDao.save(hr);
+
+        System.out.println(sql2oUserDao.findAll());
+        System.out.println(sql2oNewsDao.allNews());
+        System.out.println(sql2oDepartmentDao.findAll());*/
 
 
 
         //add new Department
-       /* post("/department/new", "application/json", (req, res) -> {
+            post("/department/new", "application/json", (req, res) -> {
             Department department = gson.fromJson(req.body(), Department.class);
             sql2oDepartmentDao.save(department);
             res.status(201);
@@ -32,17 +44,30 @@ public class App {
             return gson.toJson(sql2oDepartmentDao.findAll());
         });
 
-        //add new Department
+        //add new User
         post("/User/new", "application/json", (req, res) -> {
             User user= gson.fromJson(req.body(), User.class);
-            userDao.save(user);
+            sql2oUserDao.save(user);
             res.status(201);
             return gson.toJson(user);
         });
 
-        //get department
+        //get User
         get("/User", "application/json", (req, res) -> {
-            return gson.toJson(userDao.findAll());
+            return gson.toJson(sql2oUserDao.findAll());
+        });
+
+        //add new News
+        post("/News/new", "application/json", (req, res) -> {
+            News news = gson.fromJson(req.body(), News.class);
+            sql2oNewsDao.save(news);
+            res.status(201);
+            return gson.toJson(news);
+        });
+
+        //get New
+        get("/News", "application/json", (req, res) -> {
+            return gson.toJson(NewsDao.allNews());
         });
 
 
@@ -50,12 +75,9 @@ public class App {
         //FILTERS
         after((req, res) ->{
             res.type("application/json");
-        });*/
+        });
 
-        User Mary = new User(05,"njeri","Short pricise","admin","company admin");
-        userDao.save(Mary);
 
-        System.out.println(userDao.findAll());
 
 
 

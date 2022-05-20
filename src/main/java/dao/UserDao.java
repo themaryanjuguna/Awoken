@@ -7,7 +7,7 @@ public interface UserDao {
     //save user information
     void save(User name);
     //list all users
-    List<User> findAll();
+     List<User> findAll();
     //find user by id
     User findById(int id);
     //find all users in a department

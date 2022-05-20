@@ -9,28 +9,30 @@ import java.util.List;
 
 public class Sql2oNewsDao implements NewsDao {
 
+    private Sql2oNewsDao newsDao;
+    private Connection conn;
 
-    final Sql2o sql2o;
+    private static Sql2o sql2o;
 
     public Sql2oNewsDao(Sql2o sql2o) {
         this.sql2o = sql2o;
     }
     @Override
     public void save(News news){
-        String sql = "INSERT INTO news (title, content, employeeId) VALUES (:title, :content, :employeeId)";
+        String sql = "INSERT INTO news (title, content) VALUES (:title, :content)";
         try (Connection connection = sql2o.open()){
             int id = (int)connection.createQuery(sql, true)
                     .bind(news)
                     .executeUpdate()
                     .getKey();
             news.setId(id);
-        } catch (Sql2oException ex) { System.out.println(ex);}
+        } catch (Sql2oException e) { System.out.println("save news");}
     }
-    @Override
-    public List<News> allNews(){
-        String sql = "SELECT * FROM news";
+
+    public static List<News> allNews(){
         try(Connection connection = sql2o.open()) {
-            return connection.createQuery(sql)
+            return connection.createQuery("SELECT * FROM news")
+                    .throwOnMappingFailure(false)
                     .executeAndFetch(News.class);
         }
     }
@@ -44,12 +46,13 @@ public class Sql2oNewsDao implements NewsDao {
         }
     }
 
+
+
     @Override
-    public List<News> allDepartmentNews(int deptId) {
-        String sql = "SELECT * FROM news WHERE deptid = :deptId";
-        try (Connection connection = sql2o.open()){
-            return connection.createQuery(sql)
-                    .addParameter("deptId", deptId)
+    public List<News> allDepartmentNews(int Id){
+                try (Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM news")
+                    .throwOnMappingFailure(false)
                     .executeAndFetch(News.class);
         }
     }
