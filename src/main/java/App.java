@@ -1,8 +1,7 @@
 import com.google.gson.Gson;
-import dao.DB;
-import dao.DepartmentDao;
-import dao.Sql2oDepartmentDao;
+import dao.*;
 import models.Department;
+import models.User;
 
 import java.util.List;
 
@@ -15,11 +14,13 @@ public class App {
 
         Gson gson = new Gson();
         Sql2oDepartmentDao sql2oDepartmentDao = new Sql2oDepartmentDao(DB.sql2o);
+        Sql2oUserDao userDao= new Sql2oUserDao(DB.sql2o);
+        Sql2oNewsDao newsDao = new Sql2oNewsDao(DB.sql2o);
 
 
 
         //add new Department
-        post("/department/new", "application/json", (req, res) -> {
+       /* post("/department/new", "application/json", (req, res) -> {
             Department department = gson.fromJson(req.body(), Department.class);
             sql2oDepartmentDao.save(department);
             res.status(201);
@@ -33,21 +34,28 @@ public class App {
 
         //add new Department
         post("/User/new", "application/json", (req, res) -> {
-            Department department = gson.fromJson(req.body(), Department.class);
-            sql2oDepartmentDao.save(department);
+            User user= gson.fromJson(req.body(), User.class);
+            userDao.save(user);
             res.status(201);
-            return gson.toJson(department);
+            return gson.toJson(user);
         });
 
         //get department
         get("/User", "application/json", (req, res) -> {
-            return gson.toJson(sql2oDepartmentDao.findAll());
+            return gson.toJson(userDao.findAll());
         });
+
+
 
         //FILTERS
         after((req, res) ->{
             res.type("application/json");
-        });
+        });*/
+
+        User Mary = new User(05,"njeri","Short pricise","admin","company admin");
+        userDao.save(Mary);
+
+        System.out.println(userDao.findAll());
 
 
 

@@ -17,7 +17,7 @@ public class Sql2oUserDao implements UserDao {
     @Override
     public void save(User users) {
         String sql = "INSERT INTO users (name, profile, position, role, employeeId, deptId) VALUES (:name, :profile, :position, :role, :employeeId, :deptId)";
-        try (Connection connection = sql2o.open()) {
+        try (Connection connection = DB.sql2o.open()) {
             int id = (int) connection.createQuery(sql, true)
                     .bind(users)
                     .executeUpdate()
@@ -33,7 +33,7 @@ public class Sql2oUserDao implements UserDao {
     public List<User> findAll() {
 
         String sql = "SELECT * FROM users";
-        try (Connection connection = sql2o.open()) {
+        try (Connection connection = DB.sql2o.open()) {
             return connection.createQuery(sql)
                     .executeAndFetch(User.class);
         }
@@ -42,7 +42,7 @@ public class Sql2oUserDao implements UserDao {
     @Override
     public User findById(int id) {
 
-        try (Connection connection = sql2o.open()) {
+        try (Connection connection = DB.sql2o.open()) {
             return connection.createQuery("SELECT * FROM users WHERE id = :id")
                     .throwOnMappingFailure(false)
                     .executeAndFetchFirst(User.class);
@@ -52,7 +52,7 @@ public class Sql2oUserDao implements UserDao {
     @Override
     public User allUsersInADepartment(int deptId) {
 
-        try (Connection connection = sql2o.open()){
+        try (Connection connection = DB.sql2o.open()){
             return connection.createQuery("SELECT * FROM users WHERE deptId = :deptId")
                     .addParameter("deptId",deptId)
                     .throwOnMappingFailure(false)
@@ -63,7 +63,7 @@ public class Sql2oUserDao implements UserDao {
     @Override
     public void delete(int id) {
           String sql = "DELETE FROM users WHERE id = :id";
-            try (Connection connection = sql2o.open()) {
+            try (Connection connection = DB.sql2o.open()) {
                 connection.createQuery(sql)
                         .addParameter("id", id)
                         .executeUpdate();
@@ -76,7 +76,7 @@ public class Sql2oUserDao implements UserDao {
         @Override
         public void clearAll(){
             String sql = "DELETE FROM users";
-            try (Connection connection = sql2o.open()) {
+            try (Connection connection = DB.sql2o.open()) {
                 connection.createQuery(sql)
                         .executeUpdate();
             } catch (Sql2oException e) {
