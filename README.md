@@ -25,6 +25,7 @@ Report any bugs by hovering to https://github.com/themaryanjuguna/Awoken/issues 
 * Internet connection
 * access to a browser
 * fork from https://github.com/themaryanjuguna/Awoken.git
+* Install `sudo apt install postgresql`
 
 ## In PSQL:
 ```
