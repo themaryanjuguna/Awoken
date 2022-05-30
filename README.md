@@ -25,6 +25,7 @@ Report any bugs by hovering to https://github.com/themaryanjuguna/Awoken/issues 
 * Internet connection
 * access to a browser
 * fork from https://github.com/themaryanjuguna/Awoken.git
+* Install `sudo apt install postgresql`
 * To use the postgres database run the create.sql script in the `create.sql` folder in the project directory or run the following:
 * For testing use Postman desktop client to access the forked collection because their cloud client does not access local ports like `http://localhost:4567`.
 * In postman replace where indicated :id the number with the id you want to use in the path variables
